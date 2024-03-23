@@ -25,14 +25,17 @@ public class Authentication {
             System.out.print("\tEnter account slot: ");
             accountSlot = scan.nextInt();
         }
+        scan.nextLine();
+
         System.out.print("\tEnter your username: ");
-        username = scan.next();
+        username = scan.nextLine();
+
 
         System.out.print("\tEnter your password: ");
-        password = scan.next();
+        password = scan.nextLine();
 
         System.out.print("\tConfirm your password: ");
-        String passwordConfirmation = scan.next();
+        String passwordConfirmation = scan.nextLine();
 
         while (!password.equals(passwordConfirmation)) { //checks if passwords match... prompts again if not
             System.out.println("\tError mismatched password, try again");
@@ -45,10 +48,10 @@ public class Authentication {
             switch (registerErrorChoice) {
                 case 1:
                     System.out.print("\tEnter your password: ");
-                    password = scan.next();
+                    password = scan.nextLine();
 
                     System.out.print("\tConfirm your password: ");
-                    passwordConfirmation = scan.next();
+                    passwordConfirmation = scan.nextLine();
                     break;
                 case 2:
                     break;
@@ -62,10 +65,10 @@ public class Authentication {
         boolean loginLoop = true;
         while (loginLoop) {
             System.out.print("\tEnter your username: ");
-            username = scan.next();
+            username = scan.nextLine();
 
             System.out.print("\tEnter your password: ");
-            password = scan.next();
+            password = scan.nextLine();
 
 
             for (int i = 0; i <= 5; i++) {

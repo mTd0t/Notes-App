@@ -14,14 +14,13 @@ public class AccountFile {
         Scanner scan = new Scanner(System.in);
 
         System.out.print("\tEnter note title: ");
-        String noteTitle = scan.next();
+        String noteTitle = scan.nextLine();
 
         System.out.print("\tEnter note content: ");
-        String noteContent = scan.next();
+        String noteContent = scan.nextLine();
 
         System.out.print("\tEnter note deadline: ");
-        String noteDeadline = scan.next();
-
+        String noteDeadline = scan.nextLine();
         notesTitleList.add(noteTitle);
         notesContentList.add(noteContent);
         notesDeadlineList.add(noteDeadline);
@@ -33,6 +32,23 @@ public class AccountFile {
         for (int i = 0; i < numberOfNotes; i++) {
             System.out.println("\t" + i + ". " + notesTitleList.get(i) + " Deadline: " + notesDeadlineList.get(i));
         }
+    }
+    public void viewNote(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("\t\tNotes: ");
+        for (int i = 0; i < numberOfNotes; i++) {
+            System.out.println("\t" + i + ". " + notesTitleList.get(i) + " Deadline: " + notesDeadlineList.get(i));
+        }
+        System.out.print("\tEnter task number to view: ");
+        int choice = scan.nextInt();
+        scan.nextLine();
+
+        System.out.println();
+
+        System.out.println("\t"+notesTitleList.get(choice));
+        System.out.println("\t"+notesContentList.get(choice));
+        System.out.println("\t"+notesDeadlineList.get(choice));
+        System.out.println();
     }
 
     public void deleteNotes() {

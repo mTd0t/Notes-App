@@ -48,9 +48,10 @@ public class Main {
                 System.out.println("************************************************************");
                 System.out.println("1. Create new task");
                 System.out.println("2. View all tasks");
-                System.out.println("3. Delete Task");
-                System.out.println("4. Delete Account");
-                System.out.println("5. Exit");
+                System.out.println("3. View task");
+                System.out.println("4. Delete Task");
+                System.out.println("5. Delete Account");
+                System.out.println("6. Exit");
                 System.out.println("************************************************************");
                 System.out.print("\tEnter choice: ");
                 choice = scan.nextInt();
@@ -62,13 +63,16 @@ public class Main {
                         AccountList.AccountFileString.get(Authentication.getAccountNumberPrompt()).displayNotes();
                         break;
                     case 3:
-                        AccountList.AccountFileString.get(Authentication.getAccountNumberPrompt()).deleteNotes();
+                        AccountList.AccountFileString.get(Authentication.getAccountNumberPrompt()).viewNote();
                         break;
                     case 4:
+                        AccountList.AccountFileString.get(Authentication.getAccountNumberPrompt()).deleteNotes();
+                        break;
+                    case 5:
                         AccountList.AccountFileString.get(Authentication.getAccountNumberPrompt()).deleteAccount();
                         loginChoiceLoop = false;
                         break;
-                    case 5:
+                    case 6:
                         loginChoiceLoop = false;
                         break;
                     default:
