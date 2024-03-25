@@ -8,8 +8,13 @@ public class AccountFile {
     public String accountUsername = "";
     public String accountPassword = "";
     int numberOfNotes = 0;
-    int notesnum = numberOfNotes + 1;
 
+    public void setAccountUsername(String username){
+        accountUsername = username;
+    }
+    public void setAccountPassword(String username){
+        accountUsername = username;
+    }
     public void storeNotes() {
         Scanner scan = new Scanner(System.in);
 
@@ -50,7 +55,6 @@ public class AccountFile {
         System.out.println("\t"+notesDeadlineList.get(choice));
         System.out.println();
     }
-
     public void deleteNotes() {
         Scanner scan = new Scanner(System.in);
         System.out.println("\t\tNotes: ");

@@ -1,3 +1,4 @@
+import java.nio.channels.ScatteringByteChannel;
 import java.util.Scanner;
 
 public class Authentication {
@@ -10,22 +11,7 @@ public class Authentication {
     public static void register() {
         Scanner scan = new Scanner(System.in);
 
-
-        System.out.println("\tAccount Slots");
-        for (int i = 0; i <= 5; i++) { //loops the array username until it prints out everything
-            System.out.println("\t" + i + ". " + AccountList.AccountFileString.get(i).accountUsername);
-        }
-        System.out.print("\tEnter account slot: ");//makes the user choose the account slot
-        accountSlot = scan.nextInt();
-        while (!AccountList.AccountFileString.get(accountSlot).accountUsername.isEmpty()) {//makes the user retry if account slot is taken
-            System.out.println("\tError... please try again...");
-            for (int i = 0; i <= 5; i++) { //loops the array username until it prints out everything
-                System.out.println("\t" + i + ". " + AccountList.AccountFileString.get(i).accountUsername);
-            }
-            System.out.print("\tEnter account slot: ");
-            accountSlot = scan.nextInt();
-        }
-        scan.nextLine();
+        System.out.println("\tRegistration, please fill in the prompts");
 
         System.out.print("\tEnter your username: ");
         username = scan.nextLine();
@@ -41,23 +27,38 @@ public class Authentication {
             System.out.println("\tError mismatched password, try again");
 
             System.out.println("\tError... incorrect username or password...");
-            System.out.println("\t\t1. Retry");
-            System.out.println("\t\t2. Exit");
-            System.out.print("\t\tChoice: ");
-            int registerErrorChoice = scan.nextInt();
-            switch (registerErrorChoice) {
-                case 1:
-                    System.out.print("\tEnter your password: ");
-                    password = scan.nextLine();
+            boolean errorLoop = true;
+            int registerErrorChoice = 0;
 
-                    System.out.print("\tConfirm your password: ");
-                    passwordConfirmation = scan.nextLine();
-                    break;
-                case 2:
-                    break;
+            while (errorLoop) {
+                try {
+                    System.out.println("\t\t1. Retry");
+                    System.out.println("\t\t2. Exit");
+                    System.out.print("\t\tChoice: ");
+                    registerErrorChoice = scan.nextInt();
+                } catch (Exception e) {
+                    System.out.println("\tError... Integer required...");
+                } finally {
+                    switch (registerErrorChoice) {
+                        case 1:
+                            System.out.print("\tEnter your password: ");
+                            password = scan.nextLine();
+
+                            System.out.print("\tConfirm your password: ");
+                            passwordConfirmation = scan.nextLine();
+                            break;
+                        case 2:
+                            break;
+                        default:
+                            System.out.println("\tInvalid input... please try again...");
+
+                    }
+                }
             }
         }
         accountNumberPrompt = accountSlot;
+        AccountList.AccountFileString.add(new AccountFile());
+        accountSlot++;
     }
 
     public static void login() {
@@ -71,29 +72,25 @@ public class Authentication {
             password = scan.nextLine();
 
 
-            for (int i = 0; i <= 5; i++) {
+            for (int i = 0; i < accountSlot; i++) {
                 if (AccountList.AccountFileString.get(i).accountUsername.equals(username)) {
                     accountNumberPrompt = i;
                 }
             }
             if (username.equals(AccountList.AccountFileString.get(accountNumberPrompt).accountUsername) && password.equals(AccountList.AccountFileString.get(accountNumberPrompt).accountUsername)) {
                 loginLoop = false;
-                mainLoop = false;
                 System.out.println("\tLogin successfull!");
+                Choices.mainLoop = false;
             } else {
-
-                System.out.println("\tError... incorrect username or password...");
-                System.out.println("\t\t1. Retry");
-                System.out.println("\t\t2. Exit");
-                System.out.print("\t\tChoice: ");
-                int choice = scan.nextInt();
-                switch (choice) {
-                    case 1:
-                        break;
-                    case 2:
-                        loginLoop = false;
-
-                        break;
+                try {
+                    System.out.println("\tError... incorrect username or password...");
+                    System.out.println("\t\t1. Retry");
+                    System.out.println("\t\t2. Exit");
+                    System.out.print("\t\tChoice: ");
+                    int choice = scan.nextInt();
+                    scan.nextLine();
+                } catch (Exception e) {
+                    System.out.println("\tError... Integer required...");
                 }
             }
         }
